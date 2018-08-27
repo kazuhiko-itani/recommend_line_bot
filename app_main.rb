@@ -49,10 +49,12 @@ get '/send' do
   random_number = rand(0..19)
   book_title = ranking_list[random_number][0].gsub(" ", "")
   book_url = ranking_list[random_number][1]
+  book_image = ranking_list[random_number][2]
 
   message = {
     type: 'text',
-    text: "#{book_title}\n#{book_url}"
+    text: "#{book_title}\n#{book_image}\n#{book_url}"
   }
   client.push_message('U84fb7fffcba694b77855a55a93abc0ab', message)
+  'OK'
 end
