@@ -50,17 +50,43 @@ get '/send' do
   book_title = ranking_list[random_number][0].gsub(" ", "")
   book_url = ranking_list[random_number][1]
   book_image = ranking_list[random_number][2]
-  url = "<a href='#{book_url}'>book_title</a>"
 
   message = {
     type: 'text',
-    text: url
+    text: book_title
   }
   image = {
-    type: 'image',
-    originalContentUrl: book_image,
-    previewImageUrl: book_image
+    type: 'imagemap',
+    baseUrl: book_image,
+    altText: '本の画像とリンク',
+    baseSize: {
+      height: 1040,
+      width: 1040
+    },
+    actions: [
+      {
+        type: 'uri',
+        linkUri: book_url,
+        area: {
+          x: 0,
+          y: 0,
+          width: 1040,
+          height: 1040
+        }
+      },
+      {
+        type: 'message',
+        text: book_title,
+        area: {
+          x: 0,
+          y: 0,
+          width: 0,
+          height: 0
+        }
+      }
+    ]
   }
+
   client.push_message('U84fb7fffcba694b77855a55a93abc0ab', message)
   client.push_message('U84fb7fffcba694b77855a55a93abc0ab', image)
   'OK'
