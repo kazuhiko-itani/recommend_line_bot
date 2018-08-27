@@ -28,7 +28,7 @@ post '/callback' do
           when Line::Bot::Event::MessageType::Text
             message = {
               type: 'text',
-              text: 'てすと'
+              text: event.message['id']
             }
             client.reply_message(event['replyToken'], message)
           when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
