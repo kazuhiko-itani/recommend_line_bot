@@ -53,8 +53,14 @@ get '/send' do
 
   message = {
     type: 'text',
-    text: "#{book_title}#{book_image}#{book_url}"
+    text: "#{book_title}\n#{book_url}"
+  }
+  image = {
+    type: 'image',
+    originalContentUrl: book_image,
+    previewImageUrl: book_image
   }
   client.push_message('U84fb7fffcba694b77855a55a93abc0ab', message)
+  client.push_message('U84fb7fffcba694b77855a55a93abc0ab', image)
   'OK'
 end
