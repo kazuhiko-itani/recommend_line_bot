@@ -24,7 +24,7 @@ def scraping_amazon_ranking
         image = item.xpath("div[1]/a/img").attribute('src')
 
         title_url_image = [title, url, image]
-        ranking_list.push(pair)
+        ranking_list.push(title_url_image)
       end
     end
   end
