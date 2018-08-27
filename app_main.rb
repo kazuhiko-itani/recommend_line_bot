@@ -55,5 +55,4 @@ get '/send' do
     text: book_title
   }
   client.push_message('U84fb7fffcba694b77855a55a93abc0ab', message)
-  book_title
 end
