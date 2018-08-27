@@ -4,6 +4,7 @@ require 'kconv'
 
 def scraping_amazon_ranking
   urls = ['https://www.amazon.co.jp/gp/bestsellers/books/466282']
+  ranking_list = []
 
   Anemone.crawl(urls, :depth_limit => 0, :skip_query_strings => true) do |anemone|
     anemone.on_every_page do |page|
@@ -15,10 +16,11 @@ def scraping_amazon_ranking
       items = doc.xpath(
         "//*[@class='zg_itemRow']/div[1]/div[1]")
 
-      ranking_list = []
       items.each do |item|
        title = item.xpath("div[2]/a/div").text
-       url = item.xpath("div[2]/a").attribute('href').to_s.match(/(.+)\/ref/)[1]
+       base_url = 'https://www.amazon.co.jp'
+       url = base_url +
+                    item.xpath("div[2]/a").attribute('href').to_s.match(/(.+)\/ref/)[1]
        pair = [title, url]
        ranking_list.push(pair)
       end
@@ -27,4 +29,3 @@ def scraping_amazon_ranking
 
   return ranking_list
 end
-

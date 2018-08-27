@@ -46,12 +46,14 @@ end
 
 get '/send' do
   ranking_list = scraping_amazon_ranking
-  puts ranking_list[0][0]
+  random_number = rand(0..19)
+  book_title = ranking_list[random_number][0]
+  book_url = ranking_list[random_number][1]
 
   message = {
     type: 'text',
-    text: 'text'
+    text: book_title
   }
-  #client.push_message('U84fb7fffcba694b77855a55a93abc0ab', msg)
-  #'OK'
+  client.push_message('U84fb7fffcba694b77855a55a93abc0ab', message)
+  book_title
 end
