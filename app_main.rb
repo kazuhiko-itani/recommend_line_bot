@@ -2,6 +2,7 @@ require './amazon_ranking.rb'
 
 require 'sinatra'
 require 'line/bot'
+require 'uri'
 
 get '/' do
 	'hello!'
@@ -48,43 +49,17 @@ get '/send' do
   ranking_list = scraping_amazon_ranking
   random_number = rand(0..19)
   book_title = ranking_list[random_number][0].gsub(" ", "")
-  book_url = ranking_list[random_number][1]
+  book_url = URI.decode(ranking_list[random_number][1])
   book_image = ranking_list[random_number][2]
 
   message = {
     type: 'text',
-    text: book_title
+    text: "#{book_title}\n#{book_url}"
   }
   image = {
-    type: 'imagemap',
-    baseUrl: book_image,
-    altText: '本の画像とリンク',
-    baseSize: {
-      height: 1040,
-      width: 1040
-    },
-    actions: [
-      {
-        type: 'uri',
-        linkUri: book_url,
-        area: {
-          x: 0,
-          y: 0,
-          width: 1040,
-          height: 1040
-        }
-      },
-      {
-        type: 'message',
-        text: book_title,
-        area: {
-          x: 0,
-          y: 0,
-          width: 0,
-          height: 0
-        }
-      }
-    ]
+    type: image,
+    originalContentUrl: book_image,
+    previewImageUrl: book_image
   }
 
   client.push_message('U84fb7fffcba694b77855a55a93abc0ab', message)
