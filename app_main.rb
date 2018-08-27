@@ -12,7 +12,7 @@ def client
   }
 end
 
-post '/callback' do
+get '/callback' do
   body = request.body.read
 
   signature = request.env['HTTP_X_LINE_SIGNATURE']
@@ -31,8 +31,6 @@ post '/callback' do
               text: event.message['text']
             }
             client.reply_message(event['replyToken'], message)
-            p event
-            p event.source['userId']
           when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
             response = client.get_message_content(event.message['id'])
             tf = Tempfile.open("content")
@@ -44,11 +42,11 @@ post '/callback' do
   'OK'
 end
 
-get '/send' do
+post '/send' do
   message = {
     type: 'text',
     text: 'テストです'
   }
-  client.push_message('wakayama07169', message)
+  client.push_message('U84fb7fffcba694b77855a55a93abc0ab', message)
   'OK'
 end
