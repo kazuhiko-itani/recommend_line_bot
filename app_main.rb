@@ -1,3 +1,5 @@
+require './amazon_ranking.rb'
+
 require 'sinatra'
 require 'line/bot'
 
@@ -43,10 +45,13 @@ post '/callback' do
 end
 
 get '/send' do
+  ranking_list = scraping_amazon_ranking
+  msg = ranking_list[0][0]
+
   message = {
     type: 'text',
-    text: 'テストです'
+    text: msg
   }
-  client.push_message('U84fb7fffcba694b77855a55a93abc0ab', message)
+  client.push_message('U84fb7fffcba694b77855a55a93abc0ab', msg)
   'OK'
 end
