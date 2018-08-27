@@ -50,10 +50,11 @@ get '/send' do
   book_title = ranking_list[random_number][0].gsub(" ", "")
   book_url = ranking_list[random_number][1]
   book_image = ranking_list[random_number][2]
+  url = "<a href='#{book_url}'>book_title</a>"
 
   message = {
     type: 'text',
-    text: "#{book_title}\n#{book_url}"
+    text: url
   }
   image = {
     type: 'image',
