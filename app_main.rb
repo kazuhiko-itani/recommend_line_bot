@@ -12,7 +12,7 @@ def client
   }
 end
 
-post '/callback' do
+get '/callback' do
   body = request.body.read
 
   signature = request.env['HTTP_X_LINE_SIGNATURE']
@@ -42,12 +42,11 @@ post '/callback' do
   'OK'
 end
 
-def line_test
+post '/send' do
   message = {
     type: 'text',
     text: 'テストです'
   }
   client.push_message('wakayama07169', message)
+  'OK'
 end
-
-line_test
