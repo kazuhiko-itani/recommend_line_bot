@@ -52,7 +52,7 @@ get '/send' do
 
   message = {
     type: 'text',
-    text: book_title
+    text: "<a href='#{book_url}'>#{book_title}</a>"
   }
   client.push_message('U84fb7fffcba694b77855a55a93abc0ab', message)
 end
