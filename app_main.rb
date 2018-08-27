@@ -24,13 +24,14 @@ post '/callback' do
   events.each { |event|
     case event
       when Line::Bot::Event::Message
-        #case event.type
-          #when Line::Bot::Event::MessageType::Text
+        case event.type
+          when Line::Bot::Event::MessageType::Text
             message = {
               type: 'text',
-              text: event.source['userId']
+              text: event.message['text']
             }
             client.reply_message(event['replyToken'], message)
+            File.write('event.json', event)
           when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
             response = client.get_message_content(event.message['id'])
             tf = Tempfile.open("content")
