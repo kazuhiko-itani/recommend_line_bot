@@ -2,7 +2,7 @@ require 'sinatra'
 require 'line/bot'
 
 get '/' do
-	'hello, world!'
+	'hello!'
 end
 
 def client
@@ -28,7 +28,7 @@ post '/callback' do
           when Line::Bot::Event::MessageType::Text
             message = {
               type: 'text',
-              text: event.message['text']
+              text: event.source['userId']
             }
             client.reply_message(event['replyToken'], message)
           when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
@@ -41,3 +41,13 @@ post '/callback' do
 
   'OK'
 end
+
+def line_test
+  message = {
+    type: 'text',
+    text: 'テストです'
+  }
+  client.push_message('wakayama07169', message)
+end
+
+line_test
