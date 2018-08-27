@@ -47,7 +47,7 @@ end
 get '/send' do
   ranking_list = scraping_amazon_ranking
   random_number = rand(0..19)
-  book_title = ranking_list[random_number][0]
+  book_title = ranking_list[random_number][0].gsub(" ", "")
   book_url = ranking_list[random_number][1]
 
   message = {
