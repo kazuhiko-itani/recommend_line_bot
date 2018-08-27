@@ -28,9 +28,9 @@ post '/callback' do
           when Line::Bot::Event::MessageType::Text
             message = {
               type: 'text',
-              text: event.source['userId']
+              text: 'てすと'
             }
-            client.reply_message(event['replyToken'], message)
+            client.push_message(event.source['userId'], message)
           when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
             response = client.get_message_content(event.message['id'])
             tf = Tempfile.open("content")
