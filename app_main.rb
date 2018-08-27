@@ -46,12 +46,12 @@ end
 
 get '/send' do
   ranking_list = scraping_amazon_ranking
-  msg = ranking_list[0][0]
+  puts ranking_list[0][0]
 
   message = {
     type: 'text',
-    text: msg
+    text: 'text'
   }
-  client.push_message('U84fb7fffcba694b77855a55a93abc0ab', msg)
-  'OK'
+  #client.push_message('U84fb7fffcba694b77855a55a93abc0ab', msg)
+  #'OK'
 end
