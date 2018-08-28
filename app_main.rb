@@ -1,14 +1,12 @@
 require './amazon_ranking.rb'
+require './basic_auth.rb'
 
 require 'sinatra'
 require 'line/bot'
 require 'uri'
 
-use Rack::Auth::Basic do |username, password|
-  username == ENV['BASIC_AUTH_USERNAME'] && password == ENV['BASIC_AUTH_PASSWORD']
-end
-
 get '/' do
+  protect!
 	'hello!'
 end
 
@@ -50,6 +48,8 @@ post '/callback' do
 end
 
 get '/send' do
+  protect!
+
   ranking_list = scraping_amazon_ranking
   random_number = rand(0..19)
 
