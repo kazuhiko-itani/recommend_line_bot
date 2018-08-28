@@ -42,10 +42,10 @@ post '/callback' do
         end
       when Line::Bot::Event::Follow
         message = {
-          type: 'text'
+          type: 'text',
           text: event['source']['userId']
         }
-        client.push_message(event['source']['userId'], message)
+        client.reply_message(event['replyToken'], message)
     end
   }
 
