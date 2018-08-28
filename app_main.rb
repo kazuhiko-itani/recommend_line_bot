@@ -1,5 +1,6 @@
 require './amazon_ranking.rb'
 require './basic_auth.rb'
+require './helpers.rb'
 
 require 'sinatra'
 require 'line/bot'
