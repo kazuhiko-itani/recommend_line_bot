@@ -6,7 +6,6 @@ require 'line/bot'
 require 'uri'
 
 get '/' do
-  protect!
 	'hello!'
 end
 
