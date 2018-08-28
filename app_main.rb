@@ -45,7 +45,7 @@ post '/callback' do
           type: 'text'
           text: event['source']['userId']
         }
-        client.reply_message(event['replyToken'], message)
+        client.push_message(event['source']['userId'], message)
     end
   }
 
