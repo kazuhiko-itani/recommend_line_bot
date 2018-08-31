@@ -43,8 +43,8 @@ post '/callback' do
             tf.write(response.body)
         end
       when Line::Bot::Event::Follow
-        #google_client = Google_drive.new
-        Google_drive::insert_user_id(event['source']['userId'])
+        google_client = Google_drive.new
+        google_client.insert_user_id(event['source']['userId'])
         message = {
           type: 'text',
           text: event['source']['userId']
