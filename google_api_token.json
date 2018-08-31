@@ -1,0 +1,9 @@
+{"web":{"client_id":"213419125002-iatgcvtrvbaq81olhftvq4rh81ks56c3.apps.googleusercontent.com","project_id":"recommend-line-bot","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://www.googleapis.com/oauth2/v3/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"b1hdJcc40yY7huXP6qW_090M","redirect_uris":["http://localhost"],"javascript_origins":["http://localhost"]}}
+
+4/SQBaoXL4gIAzuO-6Ib8hmZx3CNPfP8xTbbbsL_YYSz8kgGrvEPdnbZsaHgUiHc5jByINqccyZfIOgVdpaTqLhbA#
+
+"access_token": "ya29.GlsHBv88t2iwr9TL_59UIXQRxUpxHM5pOPWJ_rHvYlO2e7-zv77n9GNxL3OfcRqelPEavbrgHeiTB-gDGqkW07YCgzASydXJz_6vbv1e_sW3ZrtXMDf1D9bz81rw",
+  "expires_in": 3600,
+  "refresh_token": "1/49bNCoIDpPA_ubrWDoIagUDVFtJuptRNtB14QB9gAjA",
+  "scope": "https://www.googleapis.com/auth/drive",
+  "token_type": "Bearer"

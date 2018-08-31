@@ -1,4 +1,5 @@
 require './amazon_ranking.rb'
+require './google_drive.rb'
 require './basic_auth.rb'
 require './helpers.rb'
 
@@ -42,6 +43,7 @@ post '/callback' do
             tf.write(response.body)
         end
       when Line::Bot::Event::Follow
+        insert_user_id(event['source']['userId'])
         message = {
           type: 'text',
           text: event['source']['userId']
