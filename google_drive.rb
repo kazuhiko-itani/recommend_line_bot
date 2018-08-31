@@ -30,6 +30,14 @@ class Google_drive
     #ws.save
   end
 
+  def return_rows
+    @ws.num_rows
+  end
+
+  def get_user_id(row_num)
+    @ws[row_num, 1]
+  end
+
   def insert_user_id(user_id)
     data_rows = @ws.num_rows
     @ws[(data_rows + 1), 1] = user_id

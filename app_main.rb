@@ -64,7 +64,11 @@ get '/send' do
     previewImageUrl: book_image
   }
 
-  client.push_message('U84fb7fffcba694b77855a55a93abc0ab', message)
-  client.push_message('U84fb7fffcba694b77855a55a93abc0ab', image)
+  google_client = Google_drive.new
+  rows_count = google_client.return_rows
+  for count in 1..rows_count do
+    client.push_message(get_user_id(count), message)
+    client.push_message(get_user_id(count), image)
+  end
   'OK'
 end
