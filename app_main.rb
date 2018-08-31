@@ -48,7 +48,7 @@ post '/callback' do
         }
         client.reply_message(event['replyToken'], message)
 
-      when Line::Bot::Event::Unfollow
+      when Line::Bot::Event::UnFollow
         google_client.delete_user_id(event['source']['userId'])
     end
   }
