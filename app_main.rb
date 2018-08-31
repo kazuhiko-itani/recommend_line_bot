@@ -66,7 +66,7 @@ get '/send' do
 
   google_client = Google_drive.new
   rows_count = google_client.return_rows
-  puts rows_count
+  rows_count
   #for count in 1..rows_count do
   #  client.push_message(get_user_id(count), message)
    # client.push_message(get_user_id(count), image)

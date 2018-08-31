@@ -75,4 +75,5 @@ class Google_drive
   end
 end
 google_drive = Google_drive.new
-p google_drive.get_user_id(1)
+count = google_drive.return_rows
+p count
