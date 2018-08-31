@@ -44,7 +44,8 @@ class Google_drive
     loop{
       id = @ws[count, 1]
       if id == user_id
-        @ws.delete_rows[count, 1]
+        @ws.delete_rows(count, 1)
+        @ws.save
         break
       else
         count += 1
@@ -54,7 +55,19 @@ class Google_drive
   end
 
   def test
-    p @ws.num_rows
+    count = 1
+
+    loop{
+      id = @ws[count, 1]
+      if id == 'U84fb7fffcba694b77855a55a93abc0ab'
+        @ws.delete_rows(count, 1)
+        @ws.save
+        break
+      else
+        count += 1
+        break if count > @ws.num_rows
+      end
+    }
   end
 end
 #google_drive = Google_drive.new
