@@ -20,7 +20,6 @@ end
 
 post '/callback' do
   body = request.body.read
-  google_client = Google_drive.new
 
   signature = request.env['HTTP_X_LINE_SIGNATURE']
   unless client.validate_signature(body, signature)
@@ -29,6 +28,7 @@ post '/callback' do
 
   events = client.parse_events_from(body)
   events.each { |event|
+    google_client = Google_drive.new
     user_id = event['source']['userId']
     case event
       when Line::Bot::Event::Message
