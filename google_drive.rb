@@ -7,6 +7,7 @@ class Google_drive
     client_id = ENV['GOOGLE_CLIENT_ID']
     client_secret = ENV['GOOGLE_CLIENT_SECRET']
     refresh_token = ENV['GOOGLE_REFRESH_TOKEN']
+    client = OAuth2::Client.new(
       client_id,
       client_secret,
       site: 'https://accounts.google.com',
