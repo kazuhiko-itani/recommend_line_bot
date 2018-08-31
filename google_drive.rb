@@ -31,7 +31,8 @@ class Google_drive
   end
 
   def return_rows
-    @ws.num_rows
+    row_count = @ws.num_rows
+    return row_count
   end
 
   def get_user_id(row_num)

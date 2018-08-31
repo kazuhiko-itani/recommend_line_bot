@@ -71,5 +71,4 @@ get '/send' do
   #  client.push_message(get_user_id(count), message)
    # client.push_message(get_user_id(count), image)
   #end
-  'OK'
 end
