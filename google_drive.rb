@@ -4,10 +4,9 @@ require 'oauth2'
 
 class Google_drive
   def initialize
-    client_id = '213419125002-iatgcvtrvbaq81olhftvq4rh81ks56c3.apps.googleusercontent.com'
-    client_secret = 'b1hdJcc40yY7huXP6qW_090M'
-    refresh_token = '1/49bNCoIDpPA_ubrWDoIagUDVFtJuptRNtB14QB9gAjA'
-    client = OAuth2::Client.new(
+    client_id = ENV['GOOGLE_CLIENT_ID']
+    client_secret = ENV['GOOGLE_CLIENT_SECRET']
+    refresh_token = ENV['GOOGLE_REFRESH_TOKEN']
       client_id,
       client_secret,
       site: 'https://accounts.google.com',
