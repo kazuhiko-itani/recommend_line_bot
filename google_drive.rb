@@ -1,8 +1,9 @@
 require 'google_drive'
-require 'pp'
 require 'oauth2'
 
 class Google_drive
+
+  # OAuth2.0認可を行い、スプレッドシート情報を取得する
   def initialize
     client_id = ENV['GOOGLE_CLIENT_ID']
     client_secret = ENV['GOOGLE_CLIENT_SECRET']
@@ -18,26 +19,19 @@ class Google_drive
     auth_token = auth_token.refresh!
     session = GoogleDrive.login_with_oauth(auth_token.token)
     @ws = session.spreadsheet_by_key('1ZuBmavwQeo2KUxQ-2BURJP3MJF4ewzQXSF2I0TQcmVE').worksheets[0]
-
-    #p ws.num_rows
-    #p ws.num_cols
-    #p ws[1, 1]
-
-    #ws[1, 1] = 'test' #if ws[1, 1] == nil
-    #p ws[1, 1]
-
-    #ws.delete_rows(1, 2)
-    #ws.save
   end
 
+  # スプレッドシートの現在の行数をreturnする
   def return_rows
     @ws.num_rows
   end
 
+  # スプレッドシートからユーザーIDを取得し、returnする
   def get_user_id(row_num)
     @ws[row_num, 1]
   end
 
+  # スプレッドシートにユーザーIDを登録する
   def insert_user_id(user_id)
     data_rows = @ws.num_rows
     @ws[(data_rows + 1), 1] = user_id
@@ -57,22 +51,4 @@ class Google_drive
     end
   end
 
-  def test
-    count = 1
-
-    loop{
-      id = @ws[count, 1]
-      if id == 'U84fb7fffcba694b77855a55a93abc0ab'
-        @ws.delete_rows(count, 1)
-        @ws.save
-        break
-      else
-        count += 1
-        break if count > @ws.num_rows
-      end
-    }
-  end
 end
-google_drive = Google_drive.new
-count = google_drive.return_rows
-p count

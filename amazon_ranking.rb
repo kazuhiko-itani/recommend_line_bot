@@ -2,6 +2,7 @@ require 'anemone'
 require 'nokogiri'
 require 'kconv'
 
+# Amazonの人気本ランキングから20位までを取得し、それぞれのタイトル、個別URL、画像URLを配列に格納してreturnする
 def scraping_amazon_ranking
   urls = ['https://www.amazon.co.jp/gp/bestsellers/books/466282']
   ranking_list = []

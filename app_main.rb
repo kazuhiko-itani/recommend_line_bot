@@ -18,6 +18,7 @@ def client
   }
 end
 
+# フレンド登録、ブロック、ブロック解除時に参照されるURL
 post '/callback' do
   body = request.body.read
 
@@ -31,14 +32,17 @@ post '/callback' do
     google_client = Google_drive.new
     user_id = event['source']['userId']
     case event
+      # メッセージが送信されたときに実行されるイベント
       when Line::Bot::Event::Message
         message = {
           type: 'text',
           text: '返信には対応していません。ごめんね。'
         }
         client.reply_message(event['replyToken'], message)
+      # 友達登録、ブロック解除されたときに実行されるイベント
       when Line::Bot::Event::Follow
         google_client.insert_user_id(user_id)
+      # ブロックされたときに実行されるイベント
       when Line::Bot::Event::Unfollow
         google_client.delete_user_id(user_id)
     end
@@ -47,6 +51,7 @@ post '/callback' do
   'OK'
 end
 
+# このURLを叩くことでおすすめ本メッセージが登録者全員に送信される
 get '/send' do
   protect!
 

@@ -1,3 +1,4 @@
+# 配列に格納されている本リストから、ランダムに1件取得し、その本のタイトル、個別URL、画像URLをreturnする
 def return_title_url_image(ranking_list)
   random_number = rand(0..19)
   book_title = ranking_list[random_number][0]
