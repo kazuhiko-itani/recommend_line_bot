@@ -32,14 +32,11 @@ post '/callback' do
     user_id = event['source']['userId']
     case event
       when Line::Bot::Event::Message
-        case event.type
-          when Line::Bot::Event::MessageType::Text
-            message = {
-              type: 'text',
-              text: event['source']['userId']
-            }
-            client.reply_message(event['replyToken'], message)
-        end
+        message = {
+          type: 'text',
+          text: '返信には対応していません。ごめんね。'
+        }
+        client.reply_message(event['replyToken'], message)
       when Line::Bot::Event::Follow
         google_client.insert_user_id(user_id)
       when Line::Bot::Event::Unfollow
