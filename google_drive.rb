@@ -40,6 +40,5 @@ class Google_drive
     p @ws.num_rows
   end
 end
-
-google_drive = Google_drive.new
-google_drive.test
+#google_drive = Google_drive.new
+#google_drive.test
