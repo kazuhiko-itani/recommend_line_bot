@@ -20,6 +20,7 @@ end
 
 post '/callback' do
   body = request.body.read
+  google_client = Google_drive.new
 
   signature = request.env['HTTP_X_LINE_SIGNATURE']
   unless client.validate_signature(body, signature)
@@ -37,19 +38,18 @@ post '/callback' do
               text: event['source']['userId']
             }
             client.reply_message(event['replyToken'], message)
-          when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
-            response = client.get_message_content(event.message['id'])
-            tf = Tempfile.open("content")
-            tf.write(response.body)
         end
+
       when Line::Bot::Event::Follow
-        google_client = Google_drive.new
         google_client.insert_user_id(event['source']['userId'])
         message = {
           type: 'text',
           text: event['source']['userId']
         }
         client.reply_message(event['replyToken'], message)
+
+      when Line::Bot::Event::Unfollow
+        google_client.delete_user_id(event['source']['userId'])
     end
   }
 

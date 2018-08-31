@@ -36,6 +36,23 @@ class Google_drive
     @ws.save
   end
 
+  # フォロー解除（ブロック）された時にスプレッドシートからuserIdを消去する
+  # DBのほうが効率いいはずだけど、これは練習の一環・・・
+  def delete_user_id(user_id)
+    count = 1
+
+    loop{
+      id = @ws[count, 1]
+      if id == user_id
+        @ws.delete_rows[count, 1]
+        break
+      else
+        count += 1
+        break if count > @ws.num_rows
+      end
+    }
+  end
+
   def test
     p @ws.num_rows
   end
