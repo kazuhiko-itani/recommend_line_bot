@@ -29,6 +29,7 @@ post '/callback' do
 
   events = client.parse_events_from(body)
   events.each { |event|
+    user_id = event['source']['userId']
     case event
       when Line::Bot::Event::Message
         case event.type
@@ -39,17 +40,10 @@ post '/callback' do
             }
             client.reply_message(event['replyToken'], message)
         end
-
       when Line::Bot::Event::Follow
-        google_client.insert_user_id(event['source']['userId'])
-        message = {
-          type: 'text',
-          text: event['source']['userId']
-        }
-        client.reply_message(event['replyToken'], message)
-
+        google_client.insert_user_id(user_id)
       when Line::Bot::Event::Unfollow
-        google_client.delete_user_id(event['source']['userId'])
+        google_client.delete_user_id(user_id)
     end
   }
 
